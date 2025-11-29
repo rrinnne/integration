@@ -1,5 +1,4 @@
 package com.rrinnne.intergation.apiRoutes;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,12 +8,10 @@ import com.rrinnne.intergation.dataBase.DataBase;
 import com.rrinnne.intergation.models.Spare;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -77,7 +74,7 @@ public class CmsApiRoute extends RouteBuilder {
                                 updateStmt.setString(4, item.getSpareStatus());
                                 updateStmt.setBigDecimal(5, item.getPrice());
                                 updateStmt.setInt(6, item.getQuantity());
-                                updateStmt.setTimestamp(7, Timestamp.valueOf(item.getUpdatedAt()));
+                                updateStmt.setString(7, item.getUpdatedAt());
                                 updateStmt.setString(8, item.getSpareCode());
                                 updateStmt.executeUpdate();
                                 updateStmt.close();
@@ -92,7 +89,7 @@ public class CmsApiRoute extends RouteBuilder {
                                 insertStmt.setString(5, item.getSpareStatus());
                                 insertStmt.setBigDecimal(6, item.getPrice());
                                 insertStmt.setInt(7, item.getQuantity());
-                                insertStmt.setTimestamp(8, Timestamp.valueOf(item.getUpdatedAt()));
+                                insertStmt.setString(8, item.getUpdatedAt());
                                 insertStmt.executeUpdate();
                                 insertStmt.close();
                             }

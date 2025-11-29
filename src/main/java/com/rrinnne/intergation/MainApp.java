@@ -1,12 +1,9 @@
 package com.rrinnne.intergation;
-
 import com.rrinnne.intergation.apiRoutes.CmsApiRoute;
 import com.rrinnne.intergation.apiRoutes.CsvApiRoute;
 import com.rrinnne.intergation.dataBase.DataBase;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
-
 import javax.sql.DataSource;
 
 public class MainApp {
@@ -20,7 +17,7 @@ public class MainApp {
         context.addRoutes(new CsvApiRoute());
 
         context.start();
-        System.out.println("Интеграционное приложение запущено...");
+        System.out.println("Приложение запущено!");
 
         Thread.sleep(Long.MAX_VALUE);
     }

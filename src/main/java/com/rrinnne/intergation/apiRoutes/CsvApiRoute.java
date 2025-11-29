@@ -1,10 +1,8 @@
 package com.rrinnne.intergation.apiRoutes;
-
 import com.rrinnne.intergation.apiRoutes.constantApi.Api;
 import com.rrinnne.intergation.dataBase.DataBase;
 import com.rrinnne.intergation.models.Spare;
 import org.apache.camel.builder.RouteBuilder;
-
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +10,7 @@ import java.io.BufferedWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class CsvApiRoute extends RouteBuilder {
                             item.setSpareStatus(results.getString("sparestatus"));
                             item.setPrice(results.getBigDecimal("price"));
                             item.setQuantity(results.getInt("quantity"));
-                            item.setUpdatedAt(results.getTimestamp("updatedat").toLocalDateTime());
+                            item.setUpdatedAt(results.getString("updatedat"));
                             spareList.add(item);
                         }
                     }
@@ -55,17 +53,17 @@ public class CsvApiRoute extends RouteBuilder {
                     }
 
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                         for (Spare s : spareList) {
+                            String price = s.getPrice().stripTrailingZeros().toPlainString();
                             String row = String.join(";",
                                     s.getSpareCode(),
                                     s.getSpareName(),
                                     s.getSpareDescription(),
                                     s.getSpareType(),
                                     s.getSpareStatus(),
-                                    s.getPrice().toPlainString(),
+                                    price,
                                     String.valueOf(s.getQuantity()),
-                                    s.getUpdatedAt().format(dtf)
+                                    s.getUpdatedAt()
                             );
                             writer.write(row);
                             writer.newLine();

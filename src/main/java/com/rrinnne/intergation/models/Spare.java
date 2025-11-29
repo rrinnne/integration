@@ -11,7 +11,7 @@ public class Spare {
     private String spareStatus;
     private BigDecimal price;
     private int quantity;
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     public String getSpareCode() { return spareCode; }
     public void setSpareCode(String spareCode) { this.spareCode = spareCode; }
@@ -34,6 +34,6 @@ public class Spare {
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public String getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 }
